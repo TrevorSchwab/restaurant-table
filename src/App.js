@@ -57,6 +57,7 @@ const STATES = [
 const App = () => {
   const [restaurantData, setRestaurantData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [state, setState] = useState('');
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -74,12 +75,23 @@ const App = () => {
     };
     fetchRestaurants();
   }, []);
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    e.target.name === 'State' && setState(e.target.value);
+  };
+
+  const filteredRestaurants = restaurantData.filter((restaurant) => {
+    const filteredState = restaurant.state.toLowerCase().includes(state.toLowerCase());
+    return filteredState;
+  });
+
   return (
     <div className="App">
       <div>
         <label>
           <span>State:</span>
-          <select name="State">
+          <select name="State" onChange={(e) => handleChange(e)}>
             <option value="all">All</option>
             {STATES.map((state) => {
               return (
@@ -105,7 +117,7 @@ const App = () => {
               <th>loading...</th>
             </tr>
           ) : (
-            restaurantData.map((restaurant) => (
+            filteredRestaurants.map((restaurant) => (
               <tr>
                 <td>{restaurant.name}</td>
                 <td>{restaurant.city}</td>
@@ -114,6 +126,11 @@ const App = () => {
                 <td>{restaurant.genre}</td>
               </tr>
             ))
+          )}
+          {filteredRestaurants.length === 0 && (
+            <tr>
+              <th>Sorry, no results match your search :(</th>
+            </tr>
           )}
         </tbody>
       </table>
