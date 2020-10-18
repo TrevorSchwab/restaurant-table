@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { STATES, GENRES } from './constants';
+import Pagination from './components/Pagination';
 import './App.css';
 
 const App = () => {
   const [restaurantData, setRestaurantData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [restaurantsPerPage] = useState(10);
   const [search, setSearch] = useState('');
   const [state, setState] = useState('');
   const [genre, setGenre] = useState('');
@@ -54,6 +57,15 @@ const App = () => {
 
     return filteredSearch && filteredState && filteredGenre;
   });
+
+  const indexOfLastRestaurant = currentPage * restaurantsPerPage;
+  const indexOfFirstRestaurant = indexOfLastRestaurant - restaurantsPerPage;
+  const currentRestaurants = filteredRestaurants.slice(
+    indexOfFirstRestaurant,
+    indexOfLastRestaurant
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="App">
@@ -110,7 +122,7 @@ const App = () => {
               <th>loading...</th>
             </tr>
           ) : (
-            filteredRestaurants.map((restaurant) => (
+            currentRestaurants.map((restaurant) => (
               <tr>
                 <td>{restaurant.name}</td>
                 <td>{restaurant.city}</td>
@@ -127,6 +139,11 @@ const App = () => {
           )}
         </tbody>
       </table>
+      <Pagination
+        totalRestaurants={filteredRestaurants.length}
+        restaurantsPerPage={restaurantsPerPage}
+        paginate={paginate}
+      />
     </div>
   );
 };
