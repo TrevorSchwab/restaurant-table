@@ -17,7 +17,7 @@ const RestaurantTable = ({ loading, currentRestaurants }) => {
           </tr>
         ) : (
           currentRestaurants.map((restaurant) => (
-            <tr>
+            <tr key={restaurant.id}>
               <td>{restaurant.name}</td>
               <td>{restaurant.city}</td>
               <td>{restaurant.state}</td>
