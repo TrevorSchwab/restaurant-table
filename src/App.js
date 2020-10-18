@@ -23,7 +23,9 @@ const App = () => {
       });
 
       const restaurants = await response.json();
-      const sortAToZ = restaurants.sort((a, b) => a.name.localeCompare(b.name));
+      const sortAToZ = restaurants.sort((restaurantA, restaurantB) =>
+        restaurantA.name.localeCompare(restaurantB.name)
+      );
       setRestaurantData(sortAToZ);
       setLoading(false);
     };

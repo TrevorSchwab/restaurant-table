@@ -1,3 +1,6 @@
+/* I did think about deriving these values programmatically from the API
+   response, but thought that might be over engineered for this project */
+
 export const STATES = [
   'AL',
   'AK',
