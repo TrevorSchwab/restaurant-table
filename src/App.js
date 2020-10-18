@@ -34,12 +34,19 @@ const App = () => {
   };
 
   const filteredRestaurants = restaurantData.filter((restaurant) => {
+    const filteredSearch =
+      restaurant.name.toLowerCase().includes(search.toLowerCase()) ||
+      restaurant.city.toLowerCase().includes(search.toLowerCase()) ||
+      restaurant.genre.toLowerCase().includes(search.toLowerCase()) ||
+      search === '';
+
     const filteredState =
       state.includes('all') || restaurant.state.toLowerCase().includes(state.toLowerCase());
+
     const filteredGenre =
       genre.includes('all') || restaurant.genre.toLowerCase().includes(genre.toLowerCase());
 
-    return filteredState && filteredGenre;
+    return filteredSearch && filteredState && filteredGenre;
   });
 
   return (
@@ -49,7 +56,7 @@ const App = () => {
           <label>
             <input name="Search" placeholder="Search Restaurants" />
           </label>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Search" />
         </form>
         <label>
           <span>State:</span>
