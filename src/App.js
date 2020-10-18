@@ -32,8 +32,10 @@ const App = () => {
   };
 
   const filteredRestaurants = restaurantData.filter((restaurant) => {
-    const filteredState = restaurant.state.toLowerCase().includes(state.toLowerCase());
-    const filteredGenre = restaurant.genre.toLowerCase().includes(genre.toLowerCase());
+    const filteredState =
+      state.includes('all') || restaurant.state.toLowerCase().includes(state.toLowerCase());
+    const filteredGenre =
+      genre.includes('all') || restaurant.genre.toLowerCase().includes(genre.toLowerCase());
 
     return filteredState && filteredGenre;
   });
