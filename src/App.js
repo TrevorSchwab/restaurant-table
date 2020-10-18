@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
+import RestaurantTable from './components/RestaurantTable';
 import Pagination from './components/Pagination';
 import './App.css';
 
@@ -70,37 +71,7 @@ const App = () => {
   return (
     <div>
       <Header handleChange={handleChange} />
-      <table className="restaurant-table">
-        <tbody>
-          <tr>
-            <th>Name </th>
-            <th>City</th>
-            <th>State</th>
-            <th>Phone Number</th>
-            <th>Genres</th>
-          </tr>
-          {loading ? (
-            <tr>
-              <th>loading...</th>
-            </tr>
-          ) : (
-            currentRestaurants.map((restaurant) => (
-              <tr>
-                <td>{restaurant.name}</td>
-                <td>{restaurant.city}</td>
-                <td>{restaurant.state}</td>
-                <td>{restaurant.telephone}</td>
-                <td>{restaurant.genre}</td>
-              </tr>
-            ))
-          )}
-          {filteredRestaurants.length === 0 && (
-            <tr>
-              <th className="alternate-states">Sorry, no results match your search :(</th>
-            </tr>
-          )}
-        </tbody>
-      </table>
+      <RestaurantTable loading={loading} currentRestaurants={currentRestaurants} />
       <Pagination
         totalRestaurants={filteredRestaurants.length}
         restaurantsPerPage={restaurantsPerPage}
