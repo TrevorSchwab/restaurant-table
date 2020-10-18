@@ -112,7 +112,7 @@ const App = () => {
           </label>
         </div>
       </div>
-      <table>
+      <table className="restaurant-table">
         <tbody>
           <tr>
             <th>Name</th>
@@ -138,7 +138,7 @@ const App = () => {
           )}
           {filteredRestaurants.length === 0 && (
             <tr>
-              <th>Sorry, no results match your search :(</th>
+              <th className="alternate-states">Sorry, no results match your search :(</th>
             </tr>
           )}
         </tbody>

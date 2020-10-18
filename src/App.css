@@ -64,6 +64,50 @@
   margin-left: 0.5rem;
 }
 
+.pagination-list {
+  display: flex;
+  list-style-type: none;
+}
+
+.pagination-list-item {
+  margin: 1rem;
+}
+
+.restaurant-table {
+  font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.restaurant-table td,
+.restaurant-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.restaurant-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.restaurant-table tr:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.restaurant-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: Black;
+  border: 1px solid red;
+  cursor: default;
+}
+
+.alternate-states {
+  background-color: white;
+  border: none !important;
+}
+
 /* Smartphones, Tablets (portrait and landscape) */
 @media (min-width: 481px) and (max-width: 767px) {
   .filter-controls {
