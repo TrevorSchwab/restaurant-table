@@ -1,63 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { STATES, GENRES } from './constants';
 import './App.css';
-
-const STATES = [
-  'AL',
-  'AK',
-  'AZ',
-  'AR',
-  'CA',
-  'CO',
-  'CT',
-  'DE',
-  'FL',
-  'GA',
-  'HI',
-  'ID',
-  'IL',
-  'IN',
-  'IA',
-  'KS',
-  'KY',
-  'LA',
-  'ME',
-  'MD',
-  'MA',
-  'MI',
-  'MN',
-  'MS',
-  'MO',
-  'MT',
-  'NE',
-  'NV',
-  'NH',
-  'NJ',
-  'NM',
-  'NY',
-  'NC',
-  'ND',
-  'OH',
-  'OK',
-  'OR',
-  'PA',
-  'RI',
-  'SC',
-  'SD',
-  'TN',
-  'TX',
-  'UT',
-  'VT',
-  'VA',
-  'WA',
-  'WV',
-  'WI',
-  'WY',
-];
 
 const App = () => {
   const [restaurantData, setRestaurantData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [state, setState] = useState('');
+  const [genre, setGenre] = useState('');
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -79,11 +28,14 @@ const App = () => {
   const handleChange = (e) => {
     e.preventDefault();
     e.target.name === 'State' && setState(e.target.value);
+    e.target.name === 'Genre' && setGenre(e.target.value);
   };
 
   const filteredRestaurants = restaurantData.filter((restaurant) => {
     const filteredState = restaurant.state.toLowerCase().includes(state.toLowerCase());
-    return filteredState;
+    const filteredGenre = restaurant.genre.toLowerCase().includes(genre.toLowerCase());
+
+    return filteredState && filteredGenre;
   });
 
   return (
@@ -97,6 +49,19 @@ const App = () => {
               return (
                 <option key={state} value={state}>
                   {state}
+                </option>
+              );
+            })}
+          </select>
+        </label>
+        <label>
+          <span>Genre:</span>
+          <select name="Genre" onChange={(e) => handleChange(e)}>
+            <option value="all">All</option>
+            {GENRES.map((genre) => {
+              return (
+                <option key={genre} value={genre}>
+                  {genre}
                 </option>
               );
             })}
