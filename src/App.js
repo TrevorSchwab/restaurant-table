@@ -28,6 +28,12 @@ const App = () => {
 
   const handleChange = (e) => {
     e.preventDefault();
+    if (e.target.id === 'onChangeSearch') {
+      if (e.target.value === '') {
+        setSearch(e.target.value);
+      }
+      return;
+    }
     e.target.name === 'Search' && setSearch(e.target.Search.value);
     e.target.name === 'State' && setState(e.target.value);
     e.target.name === 'Genre' && setGenre(e.target.value);
@@ -54,7 +60,12 @@ const App = () => {
       <div>
         <form name="Search" onSubmit={(e) => handleChange(e)}>
           <label>
-            <input name="Search" placeholder="Search Restaurants" />
+            <input
+              placeholder="Search Restaurants"
+              name="Search"
+              id="onChangeSearch"
+              onChange={(e) => handleChange(e)}
+            />
           </label>
           <input type="submit" value="Search" />
         </form>
