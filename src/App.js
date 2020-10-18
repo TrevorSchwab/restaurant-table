@@ -1,24 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [restaurantData, setRestaurantData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchRestaurants = async () => {
+      setLoading(true);
+      const response = await fetch('https://code-challenge.spectrumtoolbox.com/api/restaurants', {
+        headers: {
+          Authorization: 'Api-Key q3MNxtfep8Gt',
+        },
+      });
+
+      const restaurants = await response.json();
+      setRestaurantData(restaurants);
+      setLoading(false);
+    };
+    fetchRestaurants();
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <table>
+        <tbody>
+          <tr>
+            <th>Name</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Phone Number</th>
+            <th>Genres</th>
+          </tr>
+          {loading ? (
+            <tr>
+              <th>loading...</th>
+            </tr>
+          ) : (
+            restaurantData.map((restaurant) => (
+              <tr>
+                <td>{restaurant.name}</td>
+                <td>{restaurant.city}</td>
+                <td>{restaurant.state}</td>
+                <td>{restaurant.telephone}</td>
+                <td>{restaurant.genre}</td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
     </div>
   );
-}
+};
 
 export default App;
