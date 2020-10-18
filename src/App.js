@@ -5,6 +5,7 @@ import './App.css';
 const App = () => {
   const [restaurantData, setRestaurantData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [search, setSearch] = useState('');
   const [state, setState] = useState('');
   const [genre, setGenre] = useState('');
 
@@ -27,6 +28,7 @@ const App = () => {
 
   const handleChange = (e) => {
     e.preventDefault();
+    e.target.name === 'Search' && setSearch(e.target.Search.value);
     e.target.name === 'State' && setState(e.target.value);
     e.target.name === 'Genre' && setGenre(e.target.value);
   };
@@ -43,6 +45,12 @@ const App = () => {
   return (
     <div className="App">
       <div>
+        <form name="Search" onSubmit={(e) => handleChange(e)}>
+          <label>
+            <input name="Search" placeholder="Search Restaurants" />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
         <label>
           <span>State:</span>
           <select name="State" onChange={(e) => handleChange(e)}>
