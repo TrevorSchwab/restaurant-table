@@ -1,0 +1,33 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "plugin:react-hooks/recommended", "prettier", "prettier/react"],
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "__DEV__": false,
+    "__PROD__": false,
+    "__CLIENT__": false,
+    "__DEVTOOLS__": false,
+    "fetch": true
+  },
+  "rules": {
+    "no-param-reassign": 0,
+    "react/jsx-filename-extension": 0,
+    "react/require-default-props": 0,
+    "react/destructuring-assignment": 0,
+    "react/static-property-placement": 0,
+    "no-underscore-dangle": 0,
+    "react/forbid-prop-types": 0,
+    "arrow-parens": 0,
+    // cleanup in later versions of eslint
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["to"],
+        "aspects": ["noHref", "invalidHref", "preferButton"]
+      }
+    ]
+  }
+}
