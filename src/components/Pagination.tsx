@@ -14,7 +14,7 @@ const Pagination: React.FC<Props> = ({ restaurantsPerPage, totalRestaurants, pag
       {pageNumbers.map((number) => {
         return (
           <li key={number} className="pagination-list-item">
-            <a onClick={() => paginate(number)} href="!#">
+            <a onClick={(e) => paginate(e, number)} href="!#">
               {number}
             </a>
           </li>

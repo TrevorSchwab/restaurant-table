@@ -100,7 +100,11 @@ const App = () => {
     indexOfLastRestaurant
   );
 
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const paginate = (e: React.SyntheticEvent, pageNumber: number) => {
+    debugger;
+    e.preventDefault();
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div>
