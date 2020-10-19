@@ -101,7 +101,6 @@ const App = () => {
   );
 
   const paginate = (e: React.SyntheticEvent, pageNumber: number) => {
-    debugger;
     e.preventDefault();
     setCurrentPage(pageNumber);
   };
