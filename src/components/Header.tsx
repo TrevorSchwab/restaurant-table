@@ -1,7 +1,9 @@
 import React from 'react';
 import { STATES, GENRES, ATTIRE } from '../constants';
 
-const Header = ({ handleChange }) => {
+type Props = { handleChange: Function };
+
+const Header: React.FC<Props> = ({ handleChange }) => {
   return (
     <div className="filter-controls ">
       <div className="search-container col-5">
@@ -44,9 +46,9 @@ const Header = ({ handleChange }) => {
             })}
           </select>
         </label>
-        <label className="inputLabels">
+        <label className="input-labels">
           <span>Attire:</span>
-          <select className="filterInputs" name="Attire" onChange={(e) => handleChange(e)}>
+          <select className="filter-inputs" name="Attire" onChange={(e) => handleChange(e)}>
             <option value="all">All</option>
             {ATTIRE.map((attire) => {
               return (

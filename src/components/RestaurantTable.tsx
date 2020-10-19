@@ -1,10 +1,29 @@
 import React, { useState } from 'react';
 
-const RestaurantTable = ({ loading, currentRestaurants }) => {
+type restaurant = {
+  address1: string;
+  attire: string;
+  city: string;
+  genre: string;
+  hours: string;
+  id: string;
+  lat: string;
+  long: string;
+  name: string;
+  state: string;
+  tags: string;
+  telephone: string;
+  website: string;
+  zip: string;
+};
+
+type Props = { loading: boolean; currentRestaurants: restaurant[] };
+
+const RestaurantTable: React.FC<Props> = ({ loading, currentRestaurants }) => {
   const [showRestaurantDetails, setShowRestaurantDetails] = useState(false);
   const [restaurantID, setRestaurantID] = useState('');
 
-  const showDetails = (event, id) => {
+  const showDetails = (e: React.SyntheticEvent, id: string) => {
     setShowRestaurantDetails(!showRestaurantDetails);
     setRestaurantID(id);
   };
@@ -23,20 +42,20 @@ const RestaurantTable = ({ loading, currentRestaurants }) => {
             <th className="alternate-states">loading...</th>
           </tr>
         ) : (
-          currentRestaurants.map((restaurant) => (
+          currentRestaurants.map((restaurant: restaurant) => (
             <>
               <tr
                 className={`banner ${
                   showRestaurantDetails && restaurant.id === restaurantID ? 'expanded-row-top' : ''
                 }`}
                 key={restaurant.id}
-                onClick={(event) => showDetails(event, restaurant.id)}
+                onClick={(e) => showDetails(e, restaurant.id)}
               >
                 <td>{restaurant.name}</td>
                 <td>{restaurant.city}</td>
                 <td>{restaurant.state}</td>
                 <td>{restaurant.telephone}</td>
-                <td>{restaurant.genre}</td>
+                <td>{restaurant.genre.replace(/,/g, ', ')}</td>
               </tr>
               <>
                 {showRestaurantDetails && restaurant.id === restaurantID ? (
@@ -53,7 +72,15 @@ const RestaurantTable = ({ loading, currentRestaurants }) => {
                       <b>Website:</b>
                       <div>{restaurant.website}</div>
                     </td>
-                    <td className="expanded-data-cell"></td>
+                    <td className="expanded-data-cell">
+                      <b>Attire:</b>
+                      <div>
+                        {restaurant.attire
+                          .split(' ')
+                          .map((word) => word[0].toUpperCase() + word.slice(1))
+                          .join(' ')}
+                      </div>
+                    </td>
                     <td className="expanded-data-cell"></td>
                   </tr>
                 ) : null}

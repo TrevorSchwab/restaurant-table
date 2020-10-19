@@ -50,18 +50,26 @@ const App = () => {
     fetchRestaurants();
   }, []);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    if (e.target.id === 'onChangeSearch') {
-      if (e.target.value === '') {
-        setSearch(e.target.value);
+    const target = e.target as typeof e.target & {
+      id: string;
+      value: string;
+      name: string;
+      Search: { value: string };
+    };
+
+    if (target.id === 'onChangeSearch') {
+      if (target.value === '') {
+        setSearch(target.value);
       }
       return;
     }
-    e.target.name === 'Search' && setSearch(e.target.Search.value);
-    e.target.name === 'State' && setState(e.target.value);
-    e.target.name === 'Genre' && setGenre(e.target.value);
-    e.target.name === 'Attire' && setAttire(e.target.value);
+
+    target.name === 'Search' && setSearch(target.Search.value);
+    target.name === 'State' && setState(target.value);
+    target.name === 'Genre' && setGenre(target.value);
+    target.name === 'Attire' && setAttire(target.value);
   };
 
   const filteredRestaurants = restaurantData.filter((restaurant: restaurant) => {
@@ -92,7 +100,7 @@ const App = () => {
     indexOfLastRestaurant
   );
 
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <div>

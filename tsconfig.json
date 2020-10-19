@@ -14,8 +14,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "noImplicitAny": false
+    "noImplicitAny": true
   },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["src/serviceWorker.tsx"]
+  "include": ["**/*.ts", "**/*.tsx"]
 }
