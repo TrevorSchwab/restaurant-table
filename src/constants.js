@@ -89,3 +89,5 @@ export const GENRES = [
   'Vegetarian',
   'Vietnamese',
 ];
+
+export const ATTIRE = ['Business Casual', 'Casual', 'Formal', 'Smart Casual'];

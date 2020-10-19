@@ -10,8 +10,9 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [restaurantsPerPage] = useState(10);
   const [search, setSearch] = useState('');
-  const [state, setState] = useState('');
-  const [genre, setGenre] = useState('');
+  const [state, setState] = useState('all');
+  const [genre, setGenre] = useState('all');
+  const [attire, setAttire] = useState('all');
 
   useEffect(() => {
     const fetchRestaurants = async () => {
@@ -43,6 +44,7 @@ const App = () => {
     e.target.name === 'Search' && setSearch(e.target.Search.value);
     e.target.name === 'State' && setState(e.target.value);
     e.target.name === 'Genre' && setGenre(e.target.value);
+    e.target.name === 'Attire' && setAttire(e.target.value);
   };
 
   const filteredRestaurants = restaurantData.filter((restaurant) => {
@@ -58,7 +60,12 @@ const App = () => {
     const filteredGenre =
       genre.includes('all') || restaurant.genre.toLowerCase().includes(genre.toLowerCase());
 
-    return filteredSearch && filteredState && filteredGenre;
+    const filteredAttire =
+      attire.includes('all') ||
+      restaurant.attire.replace(/\s/g, '').toLowerCase() ===
+        attire.replace(/\s/g, '').toLowerCase();
+
+    return filteredSearch && filteredState && filteredGenre && filteredAttire;
   });
 
   const indexOfLastRestaurant = currentPage * restaurantsPerPage;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { STATES, GENRES } from '../constants';
+import { STATES, GENRES, ATTIRE } from '../constants';
 
 const Header = ({ handleChange }) => {
   return (
@@ -39,6 +39,19 @@ const Header = ({ handleChange }) => {
               return (
                 <option key={genre} value={genre}>
                   {genre}
+                </option>
+              );
+            })}
+          </select>
+        </label>
+        <label className="inputLabels">
+          <span>Attire:</span>
+          <select className="filterInputs" name="Attire" onChange={(e) => handleChange(e)}>
+            <option value="all">All</option>
+            {ATTIRE.map((attire) => {
+              return (
+                <option key={attire} value={attire}>
+                  {attire}
                 </option>
               );
             })}
