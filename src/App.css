@@ -87,7 +87,6 @@ per component if the project were larger */
 
 .restaurant-table td,
 .restaurant-table th {
-  border: 1px solid #ddd;
   padding: 8px;
 }
 
@@ -112,6 +111,18 @@ per component if the project were larger */
 .alternate-states {
   background-color: white;
   border: none !important;
+}
+
+.expanded-row-top {
+  border-top: 2px solid red;
+}
+
+.expanded-row-bottom {
+  border-bottom: 2px solid red;
+}
+
+.expanded-data-cell {
+  flex-direction: column;
 }
 
 /* Smartphones, Tablets (portrait and landscape) */
