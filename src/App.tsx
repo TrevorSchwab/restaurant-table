@@ -4,6 +4,23 @@ import RestaurantTable from './components/RestaurantTable';
 import Pagination from './components/Pagination';
 import './App.css';
 
+type restaurant = {
+  address1: string;
+  attire: string;
+  city: string;
+  genre: string;
+  hours: string;
+  id: string;
+  lat: string;
+  long: string;
+  name: string;
+  state: string;
+  tags: string;
+  telephone: string;
+  website: string;
+  zip: string;
+};
+
 const App = () => {
   const [restaurantData, setRestaurantData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -24,7 +41,7 @@ const App = () => {
       });
 
       const restaurants = await response.json();
-      const sortAToZ = restaurants.sort((restaurantA, restaurantB) =>
+      const sortAToZ = restaurants.sort((restaurantA: restaurant, restaurantB: restaurant) =>
         restaurantA.name.localeCompare(restaurantB.name)
       );
       setRestaurantData(sortAToZ);
@@ -33,7 +50,7 @@ const App = () => {
     fetchRestaurants();
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     e.preventDefault();
     if (e.target.id === 'onChangeSearch') {
       if (e.target.value === '') {
@@ -47,7 +64,7 @@ const App = () => {
     e.target.name === 'Attire' && setAttire(e.target.value);
   };
 
-  const filteredRestaurants = restaurantData.filter((restaurant) => {
+  const filteredRestaurants = restaurantData.filter((restaurant: restaurant) => {
     const filteredSearch =
       restaurant.name.toLowerCase().includes(search.toLowerCase()) ||
       restaurant.city.toLowerCase().includes(search.toLowerCase()) ||

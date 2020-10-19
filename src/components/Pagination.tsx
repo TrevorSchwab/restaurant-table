@@ -1,7 +1,9 @@
 import React from 'react';
 
+type Props = { restaurantsPerPage: number; totalRestaurants: number; paginate: Function };
+
 const Pagination = ({ restaurantsPerPage, totalRestaurants, paginate }) => {
-  const pageNumbers = [];
+  const pageNumbers: number[] = [];
 
   for (let i = 1; i <= Math.ceil(totalRestaurants / restaurantsPerPage); i++) {
     pageNumbers.push(i);
