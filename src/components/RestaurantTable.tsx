@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-type restaurant = {
+type Restaurant = {
   address1: string;
   attire: string;
   city: string;
@@ -17,7 +17,7 @@ type restaurant = {
   zip: string;
 };
 
-type Props = { loading: boolean; currentRestaurants: restaurant[] };
+type Props = { loading: boolean; currentRestaurants: Restaurant[] };
 
 const RestaurantTable: React.FC<Props> = ({ loading, currentRestaurants }) => {
   const [showRestaurantDetails, setShowRestaurantDetails] = useState(false);
@@ -42,7 +42,7 @@ const RestaurantTable: React.FC<Props> = ({ loading, currentRestaurants }) => {
             <th className="alternate-states">loading...</th>
           </tr>
         ) : (
-          currentRestaurants.map((restaurant: restaurant) => (
+          currentRestaurants.map((restaurant: Restaurant) => (
             <>
               <tr
                 className={`banner ${

@@ -91,3 +91,6 @@ export const GENRES = [
 ];
 
 export const ATTIRE = ['Business Casual', 'Casual', 'Formal', 'Smart Casual'];
+
+// I changed this to a CONSTANT instead of a state variable because the value wasn't changing
+export const RESTAURANTS_PER_PAGE = 10;

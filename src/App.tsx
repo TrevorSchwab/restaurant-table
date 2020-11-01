@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import RestaurantTable from './components/RestaurantTable';
 import Pagination from './components/Pagination';
+import { RESTAURANTS_PER_PAGE } from './constants';
 import './App.css';
 
-type restaurant = {
+type Restaurant = {
   address1: string;
   attire: string;
   city: string;
@@ -25,7 +26,6 @@ const App = () => {
   const [restaurantData, setRestaurantData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [restaurantsPerPage] = useState(10);
   const [search, setSearch] = useState('');
   const [state, setState] = useState('all');
   const [genre, setGenre] = useState('all');
@@ -41,7 +41,7 @@ const App = () => {
       });
 
       const restaurants = await response.json();
-      const sortAToZ = restaurants.sort((restaurantA: restaurant, restaurantB: restaurant) =>
+      const sortAToZ = restaurants.sort((restaurantA: Restaurant, restaurantB: Restaurant) =>
         restaurantA.name.localeCompare(restaurantB.name)
       );
       setRestaurantData(sortAToZ);
@@ -72,7 +72,7 @@ const App = () => {
     target.name === 'Attire' && setAttire(target.value);
   };
 
-  const filteredRestaurants = restaurantData.filter((restaurant: restaurant) => {
+  const filteredRestaurants = restaurantData.filter((restaurant: Restaurant) => {
     const filteredSearch =
       restaurant.name.toLowerCase().includes(search.toLowerCase()) ||
       restaurant.city.toLowerCase().includes(search.toLowerCase()) ||
@@ -93,8 +93,8 @@ const App = () => {
     return filteredSearch && filteredState && filteredGenre && filteredAttire;
   });
 
-  const indexOfLastRestaurant = currentPage * restaurantsPerPage;
-  const indexOfFirstRestaurant = indexOfLastRestaurant - restaurantsPerPage;
+  const indexOfLastRestaurant = currentPage * RESTAURANTS_PER_PAGE;
+  const indexOfFirstRestaurant = indexOfLastRestaurant - RESTAURANTS_PER_PAGE;
   const currentRestaurants = filteredRestaurants.slice(
     indexOfFirstRestaurant,
     indexOfLastRestaurant
@@ -111,7 +111,7 @@ const App = () => {
       <RestaurantTable loading={loading} currentRestaurants={currentRestaurants} />
       <Pagination
         totalRestaurants={filteredRestaurants.length}
-        restaurantsPerPage={restaurantsPerPage}
+        restaurantsPerPage={RESTAURANTS_PER_PAGE}
         paginate={paginate}
       />
     </div>
