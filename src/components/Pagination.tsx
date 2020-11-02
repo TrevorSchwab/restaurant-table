@@ -13,28 +13,27 @@ const Pagination: React.FC<Props> = ({
   currentPage,
   paginate,
 }) => {
-  const pageNumbers: number[] = [];
-
-  for (let i = 1; i <= Math.ceil(totalRestaurants / restaurantsPerPage); i++) {
-    pageNumbers.push(i);
-  }
-
+  const numberOfPages = Math.ceil(totalRestaurants / restaurantsPerPage);
   return (
     <div className="pagination-list col-3">
-      {pageNumbers.map((number) => {
-        return (
-          <li key={number}>
-            <button
-              className={`${
-                number === currentPage ? 'pagination-list-item-focus' : 'pagination-list-item'
-              }`}
-              onClick={(e) => paginate(e, number)}
-            >
-              {number}
-            </button>
-          </li>
-        );
-      })}
+      {totalRestaurants > restaurantsPerPage &&
+        Array(numberOfPages)
+          .fill(0)
+          .map((_, index) => {
+            const page = ++index;
+            return (
+              <li key={page}>
+                <button
+                  className={`${
+                    page === currentPage ? 'pagination-list-item-focus' : 'pagination-list-item'
+                  }`}
+                  onClick={(e) => paginate(e, index)}
+                >
+                  {page}
+                </button>
+              </li>
+            );
+          })}
     </div>
   );
 };
