@@ -1,19 +1,24 @@
 import React from 'react';
 import { STATES, GENRES, ATTIRE } from '../constants';
 
-type Props = { handleChange: Function };
+type Props = {
+  handleSearch: Function;
+  handleState: Function;
+  handleGenre: Function;
+  handleAttire: Function;
+};
 
-const Header: React.FC<Props> = ({ handleChange }) => {
+const Header: React.FC<Props> = ({ handleSearch, handleState, handleGenre, handleAttire }) => {
   return (
     <div className="filter-controls ">
       <div className="search-container col-5">
-        <form name="Search" onSubmit={(e) => handleChange(e)}>
+        <form name="search" onSubmit={(e) => handleSearch(e)}>
           <label>
             <input
               placeholder="Search Restaurants"
-              name="Search"
+              name="search"
               id="onChangeSearch"
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleSearch(e)}
             />
           </label>
           <input className="filterInputs" type="submit" value="Submit" />
@@ -22,7 +27,11 @@ const Header: React.FC<Props> = ({ handleChange }) => {
       <div className="dropdown-controls col-7">
         <label className="input-labels">
           <span>State:</span>
-          <select className="filter-inputs" name="State" onChange={(e) => handleChange(e)}>
+          <select
+            className="filter-inputs"
+            name="state"
+            onChange={(e) => handleState(e.target.value)}
+          >
             <option value="all">All</option>
             {STATES.map((state) => {
               return (
@@ -35,7 +44,11 @@ const Header: React.FC<Props> = ({ handleChange }) => {
         </label>
         <label className="input-labels">
           <span>Genre:</span>
-          <select className="filter-inputs" name="Genre" onChange={(e) => handleChange(e)}>
+          <select
+            className="filter-inputs"
+            name="genre"
+            onChange={(e) => handleGenre(e.target.value)}
+          >
             <option value="all">All</option>
             {GENRES.map((genre) => {
               return (
@@ -48,7 +61,11 @@ const Header: React.FC<Props> = ({ handleChange }) => {
         </label>
         <label className="input-labels">
           <span>Attire:</span>
-          <select className="filter-inputs" name="Attire" onChange={(e) => handleChange(e)}>
+          <select
+            className="filter-inputs"
+            name="attire"
+            onChange={(e) => handleAttire(e.target.value)}
+          >
             <option value="all">All</option>
             {ATTIRE.map((attire) => {
               return (

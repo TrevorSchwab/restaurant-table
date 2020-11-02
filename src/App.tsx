@@ -50,13 +50,13 @@ const App = () => {
     fetchRestaurants();
   }, []);
 
-  const handleChange = (e: React.SyntheticEvent) => {
+  const handleSearch = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
       id: string;
       value: string;
       name: string;
-      Search: { value: string };
+      search: { value: string };
     };
 
     if (target.id === 'onChangeSearch') {
@@ -66,10 +66,7 @@ const App = () => {
       return;
     }
 
-    target.name === 'Search' && setSearch(target.Search.value);
-    target.name === 'State' && setState(target.value);
-    target.name === 'Genre' && setGenre(target.value);
-    target.name === 'Attire' && setAttire(target.value);
+    setSearch(target.search.value);
   };
 
   const filteredRestaurants = restaurantData.filter((restaurant: Restaurant) => {
@@ -107,7 +104,12 @@ const App = () => {
 
   return (
     <div>
-      <Header handleChange={handleChange} />
+      <Header
+        handleSearch={handleSearch}
+        handleState={setState}
+        handleGenre={setGenre}
+        handleAttire={setAttire}
+      />
       <RestaurantTable loading={loading} currentRestaurants={currentRestaurants} />
       <Pagination
         totalRestaurants={filteredRestaurants.length}
