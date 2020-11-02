@@ -50,7 +50,11 @@ const App = () => {
     fetchRestaurants();
   }, []);
 
-  const handleSearch = (e: React.SyntheticEvent) => {
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, state, genre, attire]);
+
+  const handleSearch = (e: React.MouseEvent) => {
     e.preventDefault();
     const target = e.target as typeof e.target & {
       id: string;
