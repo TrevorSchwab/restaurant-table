@@ -45,7 +45,7 @@ const RestaurantTable: React.FC<Props> = ({ loading, currentRestaurants }) => {
           currentRestaurants.map((restaurant: Restaurant) => (
             <>
               <tr
-                className={`banner ${
+                className={`${
                   showRestaurantDetails && restaurant.id === restaurantID ? 'expanded-row-top' : ''
                 }`}
                 key={restaurant.id}
@@ -88,7 +88,7 @@ const RestaurantTable: React.FC<Props> = ({ loading, currentRestaurants }) => {
             </>
           ))
         )}
-        {currentRestaurants.length === 0 && (
+        {!loading && currentRestaurants.length === 0 && (
           <tr>
             <th className="alternate-states">Sorry, no results match your search :(</th>
           </tr>
