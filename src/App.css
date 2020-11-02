@@ -76,6 +76,13 @@ per component if the project were larger */
 
 .pagination-list-item {
   margin: 1rem;
+  cursor: pointer;
+}
+
+.pagination-list-item-focus {
+  font-size: x-large;
+  margin: 1rem;
+  cursor: pointer;
 }
 
 /* RestaurantTable Component */

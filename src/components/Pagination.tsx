@@ -1,8 +1,18 @@
 import React from 'react';
 
-type Props = { restaurantsPerPage: number; totalRestaurants: number; paginate: Function };
+type Props = {
+  restaurantsPerPage: number;
+  totalRestaurants: number;
+  currentPage: number;
+  paginate: Function;
+};
 
-const Pagination: React.FC<Props> = ({ restaurantsPerPage, totalRestaurants, paginate }) => {
+const Pagination: React.FC<Props> = ({
+  restaurantsPerPage,
+  totalRestaurants,
+  currentPage,
+  paginate,
+}) => {
   const pageNumbers: number[] = [];
 
   for (let i = 1; i <= Math.ceil(totalRestaurants / restaurantsPerPage); i++) {
@@ -13,10 +23,15 @@ const Pagination: React.FC<Props> = ({ restaurantsPerPage, totalRestaurants, pag
     <div className="pagination-list col-3">
       {pageNumbers.map((number) => {
         return (
-          <li key={number} className="pagination-list-item">
-            <a onClick={(e) => paginate(e, number)} href="!#">
+          <li key={number}>
+            <button
+              className={`${
+                number === currentPage ? 'pagination-list-item-focus' : 'pagination-list-item'
+              }`}
+              onClick={(e) => paginate(e, number)}
+            >
               {number}
-            </a>
+            </button>
           </li>
         );
       })}

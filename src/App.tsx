@@ -114,6 +114,7 @@ const App = () => {
       <Pagination
         totalRestaurants={filteredRestaurants.length}
         restaurantsPerPage={RESTAURANTS_PER_PAGE}
+        currentPage={currentPage}
         paginate={paginate}
       />
     </div>
