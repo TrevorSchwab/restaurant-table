@@ -20,14 +20,14 @@ const Pagination: React.FC<Props> = ({
         Array(numberOfPages)
           .fill(0)
           .map((_, index) => {
-            const page = ++index;
+            const page = index + 1;
             return (
               <li key={page}>
                 <button
                   className={`${
                     page === currentPage ? 'pagination-list-item-focus' : 'pagination-list-item'
                   }`}
-                  onClick={(e) => paginate(e, index)}
+                  onClick={(e) => paginate(e, page)}
                 >
                   {page}
                 </button>
