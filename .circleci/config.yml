@@ -5,3 +5,9 @@ workflows:
   node-tests:
     jobs:
       - node/test
+machine:
+  pre:
+    - mkdir ~/.yarn-cache
+dependencies:
+  cache_directories:
+    - ~/.yarn-cache
