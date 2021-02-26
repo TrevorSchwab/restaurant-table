@@ -36,7 +36,7 @@ const App = () => {
       setLoading(true);
       const response = await fetch('https://code-challenge.spectrumtoolbox.com/api/restaurants', {
         headers: {
-          Authorization: 'Api-Key q3MNxtfep8Gt',
+          Authorization: 'Api-Key q3MNxtfep8Gt', //prod: gitignored in an ENV variable
         },
       });
 
